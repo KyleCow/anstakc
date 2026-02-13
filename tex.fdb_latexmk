@@ -1,0 +1,9 @@
+# Fdb version 4
+["pdflatex"] 0 "/home/thompson/anstakc/tex.tex" "tex.pdf" "tex" 0 -1
+  "/home/thompson/anstakc/tex.tex" 0 -1 0 ""
+  "tex.aux" 0 -1 0 "pdflatex"
+  (generated)
+  "tex.aux"
+  "tex.log"
+  "tex.pdf"
+  (rewritten before read)
