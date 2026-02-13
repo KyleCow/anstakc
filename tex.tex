@@ -1,0 +1,38 @@
+\documentclass{article}
+
+
+\input{preamble.tex}
+
+\title{Analytic Stacks}
+\author{People}
+\date{January 2026}
+
+\begin{document}
+
+\maketitle
+\pagebreak
+
+\setcounter{section}{1}
+\setcounter{subsection}{3}
+\subsection{Replete and locally weakly contractible topoi}
+Throuought this section the word "topos" refers to the category of sheaves on some site 
+\begin{definition}[Replete Topos]
+    A topos $X$ is \textit{replete} if epimorphisms are closed under sequential limits, that is for a functor $F:\N^{\op} \to X$ with epimorphic transition maps $F_{n+1}\twoheadrightarrow F_n$, then the map $\lim F \to F_n$ is epic for each $n$
+\end{definition}
+
+% good properties of these
+% can pass to over category
+% exactness of produts
+% limits are exact in a sense i dont quite understand, lim F = Rlim F, i suppose after we identify X->D(X)
+\begin{definition}
+    An object in $a$ a topos is called
+    \begin{enumerate}
+        \item Compact if the "underlying geometric structure" is compact, ie if the geometric morphism $X/a \to \operatorname{Sh}(*)=\mathbf{Set}$ is proper
+        \item Stable if for all morphisms $Y \to X$ with $Y$ compact, the domain of the kernel pair $R \rightrightarrows Y$ of $f$ is also compact
+        \item Coherent if it is compact and stable
+    \end{enumerate}
+\end{definition}
+\begin{definition}[Locally Weakly Contractible Topos]
+    An object $F$ in a topos $X$ is called weakly contractible if every epimorphism $G \twoheadrightarrow F$ has a section. We say that $X$ is \textit{locally weakly contractible} if each $a \in X$ admits an epimorphism $\bigsqcup Y_i \twoheadrightarrow X$ with $Y_i$ coherent and weakly contractible
+\end{definition}
+\end{document}
