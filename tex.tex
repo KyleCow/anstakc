@@ -17,9 +17,24 @@
 \subsection{Replete and locally weakly contractible topoi}
 Throuought this section the word "topos" refers to the category of sheaves on some site 
 \begin{definition}[Replete Topos]
-    A topos $X$ is \textit{replete} if epimorphisms are closed under sequential limits, that is for a functor $F:\N^{\op} \to X$ with epimorphic transition maps $F_{n+1}\twoheadrightarrow F_n$, then the map $\lim F \to F_n$ is epic for each $n$
+    A topos $X$ is \textit{replete} if epimorphisms are closed under sequential limits, that is for a functor $F:\N^{op} \to X$ with epimorphic transition maps $F_{n+1}\twoheadrightarrow F_n$, then the map $\lim F \to F_n$ is epic for each $n$
 \end{definition}
-
+\begin{lemma}
+    \begin{enumerate}
+        \item $X$ is replete then for $x \in X$, $X/x$ is replete
+        \item $X$ is replete if and only if there is a surjection $x \to 1$ and $X/x$ is replete
+    \end{enumerate}
+\end{lemma}
+\begin{lemma}
+    Let $X$ be a replete topos, and let $F \to G$ be a map in $\operatorname{Fun}(\N^{op},X)$, assume that the induced map $F_i \to G_i$ and $F_{i+1} \to F_i \times_{G_i} G_{i+1}$ are surjective for each $i$. Then $\lim F \to \lim G$ is surjective
+\end{lemma}
+\begin{proposition}
+    \begin{enumerate}
+        \item Countable products are exact in a replete topos
+        \item If $X$ is a replete topos and $F:\N^{op} \to \mathbf{Ab}(X)$ is a diagram with $F_{n+1} \to F_n$ surjective for every $n$ then $\lim F_n \cong R\lim F_n$
+        \item If $X$ is a replete topos then the functor of $N^{op}$-indexed limits has cohomological dimension $1$
+    \end{enumerate}
+\end{proposition}
 % good properties of these
 % can pass to over category
 % exactness of produts
@@ -35,4 +50,25 @@ Throuought this section the word "topos" refers to the category of sheaves on so
 \begin{definition}[Locally Weakly Contractible Topos]
     An object $F$ in a topos $X$ is called weakly contractible if every epimorphism $G \twoheadrightarrow F$ has a section. We say that $X$ is \textit{locally weakly contractible} if each $a \in X$ admits an epimorphism $\bigsqcup Y_i \twoheadrightarrow X$ with $Y_i$ coherent and weakly contractible
 \end{definition}
+% what are postnikov towers
+\begin{proposition}
+    Let $X$ be a locally weakly contractible topos. Then
+    \begin{enumerate}
+        \item X is replete
+        \item The derived category $D(X,\Z)$ is compactly generated
+        \item Postnikov towers converge in the associated hypercomplete $\infty$-topos
+    \end{enumerate}
+\end{proposition}
+
+\begin{proposition}
+    If $X$ is a replete topos, then $D(X)$ is left-complete
+\end{proposition}
+\begin{proposition}
+    Let $f\colon A_\bullet \to A$ by a hyper cover in a replete topos $X$, then
+    \begin{enumerate}
+        \item The adjunction $id \to f_* f^*$ is an equivalence on $D(A)$
+        \item The adjunction $f_! f^* \to id$ is an eqivalence on $D(X)$
+        \item $f^*$ induces an equivalence $D(X) \cong D_{cart}(X_\bullet)\subset D(X_\bullet)$ where $D(X_\bullet)$ is the derived category of the simplicial topos defined by $X_\bullet$ and $D_{cart}(X_\bullet)$ is the full subcategory spanned by cartesian complexes 
+    \end{enumerate}
+\end{proposition}
 \end{document}
