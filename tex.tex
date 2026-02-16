@@ -25,28 +25,89 @@ Throuought this section the word "topos" refers to the category of sheaves on so
         \item $X$ is replete if and only if there is a surjection $x \to 1$ and $X/x$ is replete
     \end{enumerate}
 \end{lemma}
-\begin{lemma}
-    Let $X$ be a replete topos, and let $F \to G$ be a map in $\operatorname{Fun}(\N^{op},X)$, assume that the induced map $F_i \to G_i$ and $F_{i+1} \to F_i \times_{G_i} G_{i+1}$ are surjective for each $i$. Then $\lim F \to \lim G$ is surjective
-\end{lemma}
-\begin{proposition}
+\begin{proof}
+    To prove $(1)$ we observe that the canonical functor $X/x \to X$ preserves sequential limits and epimorphisms so in $X/x$ an epi sequential limit corresponds to an epi sequential limit in $X$ and the maps $\lim F \to F_n$ are epi in $X$ and hense epi in $X /x$
+
+    To prove $(2)$ we note that $(1)$ proves the forward direction, then for the other direction the map $g\colon x \to 1$ induced a base change map $g^*\colon X \cong X/1 \to X/x$ defined by $t \mapsto (t \times x \to x)$ which preserves limits and epimorphisms so the same argument at $(1)$ applies
+\end{proof}
+\begin{proposition}[Exactness in replete topoi]
     \begin{enumerate}
+        \item For $X$ a replete topos and $H\colon F \to G$ a map in $\operatorname{Fun}(\N^{op},X)$ where the components $h_i\colon F_i \to G_i$ and the induced maps $(f_{i+1},h_{i+1})\colon F_{i+1}\to F_i \times_{G_i}G_{i+1}$ are epimorphisms for all $i$. Then $\lim F \to \lim G$ is an epimorphism\footnote{\color{red}can this be reduced to $F_0 \to G_0$ surjective and the product thing?\color[HTML]{756244}}
         \item Countable products are exact in a replete topos
-        \item If $X$ is a replete topos and $F:\N^{op} \to \mathbf{Ab}(X)$ is a diagram with $F_{n+1} \to F_n$ surjective for every $n$ then $\lim F_n \cong R\lim F_n$
         \item If $X$ is a replete topos then the functor of $N^{op}$-indexed limits has cohomological dimension $1$
+        \item If $X$ is a replete topos and $F:\N^{op} \to \mathbf{Ab}(X)$ is a diagram with $F_{n+1} \to F_n$ surjective for every $n$ then $\lim F_n \cong R\lim F_n$
     \end{enumerate}
 \end{proposition}
-% good properties of these
-% can pass to over category
-% exactness of produts
-% limits are exact in a sense i dont quite understand, lim F = Rlim F, i suppose after we identify X->D(X)
+\begin{proof}
+    To prove $(1)$ Take any $A \in X$ and any map $s\colon A \to \lim G$ we want to find an epimorphism $A' \to A$ that lifts $s$. To do so we construct a tower of epimorphisms \[\dots \to A_i \to A_{i-1} \to \dots \to A_0 \to A\]
+    Such that there are maps $t_n\colon A_i \to F_i$ that lift the maps $s_n\colon A \to G_i$. We can construct one as follows, due to the fact that the pullback of an epimorphism is an epimorphism in a topos let $X_0 = X \times_{G_0}F_0$ we get an epimorphism $X_0 \to X$ that lifts $s_0$, we can continue inductively with $X_{i+1}=X_{i} \times_{F_i \times_{G_i} \times G_{i+1}} F_{i+1}$. Diagramatically 
+\[\begin{tikzcd}
+	{A_{i+1}} & {F_{i+1}} \\
+	{A_i} & {F_i \times_{G_i} G_{i+1}} & {F_i} \\
+	A & {G_{i+1}} & {G_i}
+	\arrow["{t_{i+1}}", from=1-1, to=1-2]
+	\arrow[two heads, from=1-1, to=2-1]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=1-1, to=2-2]
+	\arrow["{(f_{i+1},h_{i+1})}", two heads, from=1-2, to=2-2]
+	\arrow["{(t_i, s_i \circ\pi_i)}", from=2-1, to=2-2]
+	\arrow["{\pi_i}", two heads, from=2-1, to=3-1]
+	\arrow[from=2-2, to=2-3]
+	\arrow[two heads, from=2-2, to=3-2]
+	\arrow["\lrcorner"{anchor=center, pos=0.125}, draw=none, from=2-2, to=3-3]
+	\arrow["{h_i}", two heads, from=2-3, to=3-3]
+	\arrow["{s_{i+1}}", from=3-1, to=3-2]
+	\arrow["{g_{i+1}}", from=3-2, to=3-3]
+\end{tikzcd}\]
+Since $X$ is replete taking the limit over this tower gives an epimorphism $\lim A_i \to A$ so that $s$ factors through $h$, that is 
+\[\begin{tikzcd}
+	{\lim A_i} & {\lim F} \\
+	A & {\lim G}
+	\arrow[from=1-1, to=1-2]
+	\arrow[two heads, from=1-1, to=2-1]
+	\arrow[from=1-2, to=2-2]
+	\arrow[from=2-1, to=2-2]
+\end{tikzcd}\]
+Taking then $A=\lim G$ and $s=id$ proves the claim
+\newline
+This allows us to prove $(2)$ quite simply as products are already left exact so we just need to check that for epimorphisms $h_n: F_n \to G_n$ we have $\prod_n F_n \to \prod_n G_n$ is epi. This follows from $(1)$ by taking $\prod_n F_n = \lim \prod_{i < n} F_i$ and noting that finite products preserve epis already and the map \[\prod_{i < n+1} F_i \to \prod_{i < n} F_i \times _{\prod_{i < n}G_i}\prod_{i < n+1}G_i\] Can be checked to be epimorphic using the internal language of the topos as the fiber product is just $\{((g_0,...,g_n),(f_0,...,f_{n-1}))\vert g_i=h_if_i\}$ so surjectivity is clear
+\newline
+To prove $(3)$ we've already shown that the product agrees with the derived product so for any limit for a diagram with $t_n:f_{n+1} \to f_n$ we can write it as the limit of 
+\[
+\prod_n F_n \to^{t-id} \prod_n F_n
+\]
+Hense giving an exact triangle
+\[
+R \lim F_n \to \prod_n F_n \to \prod_n F_n \to
+\]
+and so as the products are concentrated in degree $0$, $R\lim F_n$ is concentrated in degrees $0,1$
+\newline
+To prove $(4)$ then we use the same exact triangle from before
+\[
+R \lim F_n \to \prod_n F_n \to \prod_n F_n \to
+\]
+It suffices to show that this $t-id$ is surjective as then $R\lim F_n$ will be concentrated in degree $0$. For the sake of making this easier to read we suggestively define $F_n = G_n$ and $t-id$ is assumed to be a map 
+\[
+\prod_n F_n \to \prod_n G_n
+\]
+So maps $F \to G$ are defined by this, and maps $F\to F,G \to G$ are understood to be identities/projections .The surjectivity of $t$ means that the map induced by $t-id$
+\[
+\prod_{i \leq n+1} F_i \to \prod_{i \leq n} G_i
+\]
+is surjective as we can show this inductively using the internal language. Additionally as we did before the induced map 
+\[
+\prod_{i \leq n+2} F_i \to \prod_{i \leq n+1}G_i\times_{\prod_{i \leq n}G_i}\prod_{i \leq n+1}F_i
+\]
+Is also surjective, this means by $(1)$ the whole map is surjective
+\end{proof}
 \begin{definition}
     An object in $a$ a topos is called
     \begin{enumerate}
-        \item Compact if the "underlying geometric structure" is compact, ie if the geometric morphism $X/a \to \operatorname{Sh}(*)=\mathbf{Set}$ is proper
+        \item Compact if the `underlying geometric structure' is compact, ie if the geometric morphism $X/a \to \operatorname{Sh}(*)=\mathbf{Set}$ is proper
         \item Stable if for all morphisms $Y \to X$ with $Y$ compact, the domain of the kernel pair $R \rightrightarrows Y$ of $f$ is also compact
         \item Coherent if it is compact and stable
     \end{enumerate}
 \end{definition}
+\color{red}I dont understand this notion so this section is hard\color[HTML]{756244}
 \begin{definition}[Locally Weakly Contractible Topos]
     An object $F$ in a topos $X$ is called weakly contractible if every epimorphism $G \twoheadrightarrow F$ has a section. We say that $X$ is \textit{locally weakly contractible} if each $a \in X$ admits an epimorphism $\bigsqcup Y_i \twoheadrightarrow X$ with $Y_i$ coherent and weakly contractible
 \end{definition}
