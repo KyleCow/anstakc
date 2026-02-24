@@ -132,4 +132,89 @@ Is also surjective, this means by $(1)$ the whole map is surjective
         \item $f^*$ induces an equivalence $D(X) \cong D_{cart}(X_\bullet)\subset D(X_\bullet)$ where $D(X_\bullet)$ is the derived category of the simplicial topos defined by $X_\bullet$ and $D_{cart}(X_\bullet)$ is the full subcategory spanned by cartesian complexes 
     \end{enumerate}
 \end{proposition}
+
+
+\section{Lawvere Theories on Topoi}
+\begin{definition}
+    A \textit{Lawvere Theory} is a category $C$ with finite products and a distinguished element $x$ so that each object is isomorphic to a finite power of $x$, ie $\forall y, y \cong x^{\times n}$
+\end{definition}
+\begin{definition}
+    For a Laevere theory $C$, and a category with products $S$, \textit{a model in} $\mathit{S}$ is a product preserving functor $C \to S$. We define the category of such models as a full subcategory of the category of functors $C \to S$ and denote it
+    \[
+    \operatorname{Fun}^\times(C, S)
+    \]
+\end{definition}
+\begin{example}
+    \begin{enumerate}
+        \item On the category of finitely generated free groups we have that $F(n) \sqcup F(m) \cong F(m+n)$ so the opposite category of finitely generated free groups is a Lawvere theory with distinguished object $\Z$. A functor $F:\mathbf{FiniteFreeGroups}^{op} \to \mathbf{Set}$ then picks out a specific set $F(\Z)$ along with a multiplication map $F(\Z)\times F(\Z) \to F(\Z)$ induced by the map $1 \mapsto ab$ that satisfies the group laws by the pushforward of these laws in $\mathbf{FiniteFreeGroups}^{op}$
+        \item Similarly a ring is just a model in sets of the Lawvere theory of integer polynomial rings
+        \item Additionally for a field $k$ a $k$ algebra is a model in sets of the $k$-polynomial rings
+    \end{enumerate}
+\end{example}
+\begin{lemma}
+    For $C$ a Lawvere theory. Suppose in addition it's coextensive, ie for any $m,n$ the diagram
+    \[
+    \begin{tikzcd}
+x^0           & x^n \arrow[l]                      \\
+x^m \arrow[u] & x^m \times x^n \arrow[l] \arrow[u]
+\end{tikzcd}
+    \]
+    Is a pushout square.
+    \newline
+    For any topos $X=\operatorname{Sh}(S)$ the following categories are equivalent 
+    \begin{enumerate}
+        \item $\operatorname{Fun}^\times(C,X)$
+        \item $\operatorname{Sh}(S,\operatorname{Fun}^\times(C,\mathbf{Set}))$
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    First we put a topology on $C^{op}$ so that everything here can be considered as sheaves. Define the topology $\tau_G$ on $C^{op}$ the covers of $A$ are finite families of morphisms $\{A_\lambda \leftarrow A\}_{\lil}$ so that the induced map 
+    \[
+    A \to \prod_\Lambda A_\lambda A_\lambda
+    \]
+    Is an isomorphism, this is known as the Gaeta toplogy on $C^{op}$. Sheaves for this topology are thus functors $F \colon C \to \mathbf{Set}$ so that for any finite family $\{A_\lambda\}_\lil$ we have the equaliser
+    \[
+F(A) \to \prod_{\lil}F(A_\lambda) \rightrightarrows \prod_{\mu \lil} F(A_\mu \sqcup_A A_\lambda)
+    \]
+Where $A \cong \prod_\lil A_\lambda$. If each $F(A_\mu \sqcup_A A_\lambda)$ is terminal then we're ready as this is an equiliser if and only if $F(\prod_\lil A_\lambda) \cong \prod_{\lil}F(A_\lambda)$. Note that $x^0$ admits the empty cover so must map to a terminal object. So inductively it suffices to show that $x^0 \cong \operatorname{colim}(x^n \leftarrow x^n \times x^m \rightarrow x^m)$, this is true by assumptopm\footnote{I'm not 100\% on if this needs to be assumed, i can concieve of a world where $x$ is a cone over the diagram but there is no morphism $x^0 \to x$ but I haven't written it down}
+
+From here the proof is clear as the product of sites is well behaved so 
+\begin{align*}
+    \operatorname{Fun}^\times(C,X) &\cong \operatorname{Sh}(C^{op},\operatorname{Sh}(S,\mathbf{Set})) \\
+    &\cong \operatorname{Sh}(C^{op} \times S,\mathbf{Set}) \\
+    &\cong \operatorname{Sh}(S,\operatorname{Sh}(C^{op}))
+    &\cong \operatorname{Sh}(S,\operatorname{Fun}^\times(C,\mathbf{Set}))
+\end{align*}
+\end{proof}
+This allows us to define algebraic structures internal to a topos
+\begin{lemma}
+    As written for all the examples
+\end{lemma}
+\begin{proof}
+    Any object $F$ of $(4)$ gives an object of $(3)$ by taking as an object 
+    \[
+    F(\operatorname{Free}(1))
+    \]
+    and for an $n$-ary operation $(\cdot,...,\cdot)$, the morphism induced by 
+    \[
+    \operatorname{Free}(1) \to \operatorname{Free}(n)
+    \] 
+    that is in turn induced by by 
+    \[
+    1 \mapsto (1,...,n)
+    \]
+    The diagrams are satisfied as they hold in the Lawvere Theory. In addition any object of the Lawvere theory embeds in $(3)$ as the image of the hom functor under this association and so $(3)$ embeds in $(4)$ by the restricted internal hom functor giving an equivalence. Note these embeddings are mutual inverses as the double compositions preserve the fundamental object and the maps on this object are precicely the images of the maps on the free objects by pulling back the map 
+    \[
+    \hom(\underline{\operatorname{Free}(n)},M^k) \to \hom(\underline{\operatorname{Free}(m)},M^j)
+    \]
+    to a map 
+    \[
+    \hom(\underline{\operatorname{Free}(nk)},M) \to \hom(\underline{\operatorname{Free}(mj)},M)
+    \]
+    Which by yoneda is just the data of some map in our original category so double application is an isomorphism on $(3)$, and double application on $(4)$ is precicely the yoneda mapping so an isomorphism
+    \newline
+    $(3)$ is equivalent to $(2)$ by pushing forward and pulling back the structure morphisms through $\hom$.
+    \newline
+    $(4)$ is equivalent to $(1)$ by lemma
+\end{proof}
 \end{document}
