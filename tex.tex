@@ -133,6 +133,7 @@ Is also surjective, this means by $(1)$ the whole map is surjective
     \end{enumerate}
 \end{proposition}
 
+\pagebreak 
 
 \section{Lawvere Theories on Topoi}
 \begin{definition}
@@ -152,7 +153,7 @@ Is also surjective, this means by $(1)$ the whole map is surjective
     \end{enumerate}
 \end{example}
 \begin{lemma}
-    For $C$ a Lawvere theory. Suppose in addition it's coextensive, ie for any $m,n$ the diagram
+    Let $C$ be a Lawvere theory. Suppose in addition it's coextensive, ie for any $m,n$ the diagram
     \[
     \begin{tikzcd}
 x^0           & x^n \arrow[l]                      \\
@@ -170,19 +171,19 @@ x^m \arrow[u] & x^m \times x^n \arrow[l] \arrow[u]
 \begin{proof}
     First we put a topology on $C^{op}$ so that everything here can be considered as sheaves. Define the topology $\tau_G$ on $C^{op}$ the covers of $A$ are finite families of morphisms $\{A_\lambda \leftarrow A\}_{\lil}$ so that the induced map 
     \[
-    A \to \prod_\Lambda A_\lambda A_\lambda
+    A \to \prod_\Lambda A_\lambda
     \]
     Is an isomorphism, this is known as the Gaeta toplogy on $C^{op}$. Sheaves for this topology are thus functors $F \colon C \to \mathbf{Set}$ so that for any finite family $\{A_\lambda\}_\lil$ we have the equaliser
     \[
 F(A) \to \prod_{\lil}F(A_\lambda) \rightrightarrows \prod_{\mu \lil} F(A_\mu \sqcup_A A_\lambda)
     \]
-Where $A \cong \prod_\lil A_\lambda$. If each $F(A_\mu \sqcup_A A_\lambda)$ is terminal then we're ready as this is an equiliser if and only if $F(\prod_\lil A_\lambda) \cong \prod_{\lil}F(A_\lambda)$. Note that $x^0$ admits the empty cover so must map to a terminal object. So inductively it suffices to show that $x^0 \cong \operatorname{colim}(x^n \leftarrow x^n \times x^m \rightarrow x^m)$, this is true by assumptopm\footnote{I'm not 100\% on if this needs to be assumed, i can concieve of a world where $x$ is a cone over the diagram but there is no morphism $x^0 \to x$ but I haven't written it down}
+Where $A \cong \prod_\lil A_\lambda$. If each $F(A_\mu \sqcup_A A_\lambda)$ is terminal then we're ready as this is an equiliser if and only if $F(\prod_\lil A_\lambda) \cong \prod_{\lil}F(A_\lambda)$. Note that $x^0$ admits the empty cover so must map to a terminal object. So inductively it suffices to show that $x^0 \cong \operatorname{colim}(x^n \leftarrow x^n \times x^m \rightarrow x^m)$, this is true by assumption\footnote{I'm not 100\% on if this needs to be assumed, i can concieve of a world where $x$ is a cone over the diagram but there is no morphism $x^0 \to x$ but I haven't written it down}
 
 From here the proof is clear as the product of sites is well behaved so 
 \begin{align*}
     \operatorname{Fun}^\times(C,X) &\cong \operatorname{Sh}(C^{op},\operatorname{Sh}(S,\mathbf{Set})) \\
     &\cong \operatorname{Sh}(C^{op} \times S,\mathbf{Set}) \\
-    &\cong \operatorname{Sh}(S,\operatorname{Sh}(C^{op}))
+    &\cong \operatorname{Sh}(S,\operatorname{Sh}(C^{op})) \\
     &\cong \operatorname{Sh}(S,\operatorname{Fun}^\times(C,\mathbf{Set}))
 \end{align*}
 \end{proof}
